@@ -517,6 +517,7 @@ static void *SDL_ShaderCross_INTERNAL_CompileUsingDXC(
 
   *size = blob->lpVtbl->GetBufferSize(blob);
   if (errors != NULL && errors->lpVtbl->GetBufferSize(errors) != 0) {
+    char *message = (char *)errors->lpVtbl->GetBufferPointer(errors);
     if (*size == 0) {
       SDL_SetError("HLSL compilation failed: %s", message);
       dxcResult->lpVtbl->Release(dxcResult);
